@@ -1,0 +1,18 @@
+{
+  "Provinsi": "Jawa Barat",
+  "Tahun": 2028,
+  "Luas Panen (ha)": 150000.0,
+  "Produktivitas": null,
+  "Suhu Min (oC)": 22.0,
+  "Suhu Rata-rata (oC)": 27.5,
+  "Suhu Maks (oC)": 33.0,
+  "Kelembapan (%)": 80.0,
+  "Curah Hujan (mm)": 2000.0,
+  "Jumlah Hari Hujan (hari)": null,
+  "Kecepatan Angin (m/s)": null,
+  "Tekanan Udara (mb)": null,
+  "Penyinaran Matahari (%)": null,
+  "Annual_SOI_BOM": -5.0,
+  "SOI_BOM_Label": "Netral",
+  "Annual_DMI": 0.2
+}

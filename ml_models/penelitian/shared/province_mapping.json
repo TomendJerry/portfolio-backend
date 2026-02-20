@@ -1,0 +1,263 @@
+{
+  "Nanggroe Aceh Darussalam": {
+    "ui_label": "Nanggroe Aceh Darussalam",
+    "dataset_label": "Nanggroe Aceh Darussalam",
+    "imputation_folder": "Nanggroe Aceh Darussalam",
+    "production_ohe_label": "Nanggroe Aceh Darussalam",
+    "demand_ohe_label": "Nanggroe Aceh Darussalam",
+    "aliases": [
+      "Nanggroe Aceh Darussalam"
+    ]
+  },
+  "Sumatera Utara": {
+    "ui_label": "Sumatera Utara",
+    "dataset_label": "Sumatera Utara",
+    "imputation_folder": "Sumatera Utara",
+    "production_ohe_label": "Sumatera Utara",
+    "demand_ohe_label": "Sumatera Utara",
+    "aliases": [
+      "Sumatera Utara"
+    ]
+  },
+  "Sumatera Barat": {
+    "ui_label": "Sumatera Barat",
+    "dataset_label": "Sumatera Barat",
+    "imputation_folder": "Sumatera Barat",
+    "production_ohe_label": "Sumatera Barat",
+    "demand_ohe_label": "Sumatera Barat",
+    "aliases": [
+      "Sumatera Barat"
+    ]
+  },
+  "Sumatera Selatan & Bangka Belitung": {
+    "ui_label": "Sumatera Selatan & Bangka Belitung",
+    "dataset_label": "Sumatera Selatan & Bangka Belitung",
+    "imputation_folder": "Sumatera Selatan & Bangka Belitung",
+    "production_ohe_label": "Sumatera Selatan & Bangka Belitung",
+    "demand_ohe_label": "Sumatera Selatan & Bangka Belitung",
+    "aliases": [
+      "Sumatera Selatan & Bangka Belitung"
+    ]
+  },
+  "Riau & Kepulauan Riau": {
+    "ui_label": "Riau & Kepulauan Riau",
+    "dataset_label": "Riau & Kepulauan Riau",
+    "imputation_folder": "Riau & Kepulauan Riau",
+    "production_ohe_label": "Riau & Kepulauan Riau",
+    "demand_ohe_label": "Riau & Kepulauan Riau",
+    "aliases": [
+      "Riau & Kepulauan Riau"
+    ]
+  },
+  "Jambi": {
+    "ui_label": "Jambi",
+    "dataset_label": "Jambi",
+    "imputation_folder": "Jambi",
+    "production_ohe_label": "Jambi",
+    "demand_ohe_label": "Jambi",
+    "aliases": [
+      "Jambi"
+    ]
+  },
+  "Bengkulu": {
+    "ui_label": "Bengkulu",
+    "dataset_label": "Bengkulu",
+    "imputation_folder": "Bengkulu",
+    "production_ohe_label": "Bengkulu",
+    "demand_ohe_label": "Bengkulu",
+    "aliases": [
+      "Bengkulu"
+    ]
+  },
+  "Lampung": {
+    "ui_label": "Lampung",
+    "dataset_label": "Lampung",
+    "imputation_folder": "Lampung",
+    "production_ohe_label": "Lampung",
+    "demand_ohe_label": "Lampung",
+    "aliases": [
+      "Lampung"
+    ]
+  },
+  "Kalimantan Barat": {
+    "ui_label": "Kalimantan Barat",
+    "dataset_label": "Kalimantan Barat",
+    "imputation_folder": "Kalimantan Barat",
+    "production_ohe_label": "Kalimantan Barat",
+    "demand_ohe_label": "Kalimantan Barat",
+    "aliases": [
+      "Kalimantan Barat"
+    ]
+  },
+  "Kalimantan Selatan": {
+    "ui_label": "Kalimantan Selatan",
+    "dataset_label": "Kalimantan Selatan",
+    "imputation_folder": "Kalimantan Selatan",
+    "production_ohe_label": "Kalimantan Selatan",
+    "demand_ohe_label": "Kalimantan Selatan",
+    "aliases": [
+      "Kalimantan Selatan"
+    ]
+  },
+  "Kalimantan Timur": {
+    "ui_label": "Kalimantan Timur",
+    "dataset_label": "Kalimantan Timur",
+    "imputation_folder": "Kalimantan Timur",
+    "production_ohe_label": "Kalimantan Timur",
+    "demand_ohe_label": "Kalimantan Timur",
+    "aliases": [
+      "Kalimantan Timur"
+    ]
+  },
+  "Kalimantan Tengah": {
+    "ui_label": "Kalimantan Tengah",
+    "dataset_label": "Kalimantan Tengah",
+    "imputation_folder": "Kalimantan Tengah",
+    "production_ohe_label": "Kalimantan Tengah",
+    "demand_ohe_label": "Kalimantan Tengah",
+    "aliases": [
+      "Kalimantan Tengah"
+    ]
+  },
+  "DKI Jakarta & Banten": {
+    "ui_label": "DKI Jakarta & Banten",
+    "dataset_label": "DKI Jakarta & Banten",
+    "imputation_folder": "DKI Jakarta & Banten",
+    "production_ohe_label": "DKI Jakarta & Banten",
+    "demand_ohe_label": "DKI Jakarta & Banten",
+    "aliases": [
+      "DKI Jakarta & Banten"
+    ]
+  },
+  "Jawa Barat": {
+    "ui_label": "Jawa Barat",
+    "dataset_label": "Jawa Barat",
+    "imputation_folder": "Jawa Barat",
+    "production_ohe_label": "Jawa Barat",
+    "demand_ohe_label": "Jawa Barat",
+    "aliases": [
+      "Jawa Barat"
+    ]
+  },
+  "Jawa Tengah": {
+    "ui_label": "Jawa Tengah",
+    "dataset_label": "Jawa Tengah",
+    "imputation_folder": "Jawa Tengah",
+    "production_ohe_label": "Jawa Tengah",
+    "demand_ohe_label": "Jawa Tengah",
+    "aliases": [
+      "Jawa Tengah"
+    ]
+  },
+  "DI Yogyakarta": {
+    "ui_label": "DI Yogyakarta",
+    "dataset_label": "DI Yogyakarta",
+    "imputation_folder": "DI Yogyakarta",
+    "production_ohe_label": "DI Yogyakarta",
+    "demand_ohe_label": "DI Yogyakarta",
+    "aliases": [
+      "DI Yogyakarta"
+    ]
+  },
+  "Jawa Timur": {
+    "ui_label": "Jawa Timur",
+    "dataset_label": "Jawa Timur",
+    "imputation_folder": "Jawa Timur",
+    "production_ohe_label": "Jawa Timur",
+    "demand_ohe_label": "Jawa Timur",
+    "aliases": [
+      "Jawa Timur"
+    ]
+  },
+  "Bali": {
+    "ui_label": "Bali",
+    "dataset_label": "Bali",
+    "imputation_folder": "Bali",
+    "production_ohe_label": "Bali",
+    "demand_ohe_label": "Bali",
+    "aliases": [
+      "Bali"
+    ]
+  },
+  "Nusa Tenggara Barat": {
+    "ui_label": "Nusa Tenggara Barat",
+    "dataset_label": "Nusa Tenggara Barat",
+    "imputation_folder": "Nusa Tenggara Barat",
+    "production_ohe_label": "Nusa Tenggara Barat",
+    "demand_ohe_label": "Nusa Tenggara Barat",
+    "aliases": [
+      "Nusa Tenggara Barat"
+    ]
+  },
+  "Nusa Tenggara Timur": {
+    "ui_label": "Nusa Tenggara Timur",
+    "dataset_label": "Nusa Tenggara Timur",
+    "imputation_folder": "Nusa Tenggara Timur",
+    "production_ohe_label": "Nusa Tenggara Timur",
+    "demand_ohe_label": "Nusa Tenggara Timur",
+    "aliases": [
+      "Nusa Tenggara Timur"
+    ]
+  },
+  "Sulawesi Utara & Gorontalo": {
+    "ui_label": "Sulawesi Utara & Gorontalo",
+    "dataset_label": "Sulawesi Utara & Gorontalo",
+    "imputation_folder": "Sulawesi Utara & Gorontalo",
+    "production_ohe_label": "Sulawesi Utara & Gorontalo",
+    "demand_ohe_label": "Sulawesi Utara & Gorontalo",
+    "aliases": [
+      "Sulawesi Utara & Gorontalo"
+    ]
+  },
+  "Sulawesi Tengah": {
+    "ui_label": "Sulawesi Tengah",
+    "dataset_label": "Sulawesi Tengah",
+    "imputation_folder": "Sulawesi Tengah",
+    "production_ohe_label": "Sulawesi Tengah",
+    "demand_ohe_label": "Sulawesi Tengah",
+    "aliases": [
+      "Sulawesi Tengah"
+    ]
+  },
+  "Sulawesi Tenggara": {
+    "ui_label": "Sulawesi Tenggara",
+    "dataset_label": "Sulawesi Tenggara",
+    "imputation_folder": "Sulawesi Tenggara",
+    "production_ohe_label": "Sulawesi Tenggara",
+    "demand_ohe_label": "Sulawesi Tenggara",
+    "aliases": [
+      "Sulawesi Tenggara"
+    ]
+  },
+  "Sulawesi Selatan & Barat": {
+    "ui_label": "Sulawesi Selatan & Barat",
+    "dataset_label": "Sulawesi Selatan & Sulawesi Barat",
+    "imputation_folder": "Sulawesi Selatan & Sulawesi Barat",
+    "production_ohe_label": "Sulawesi Selatan & Sulawesi Barat",
+    "demand_ohe_label": "Sulawesi Selatan & Sulawesi Barat",
+    "aliases": [
+      "Sulawesi Selatan & Barat",
+      "Sulawesi Selatan & Sulawesi Barat"
+    ]
+  },
+  "Maluku & Maluku Utara": {
+    "ui_label": "Maluku & Maluku Utara",
+    "dataset_label": "Maluku & Maluku Utara",
+    "imputation_folder": "Maluku & Maluku Utara",
+    "production_ohe_label": "Maluku & Maluku Utara",
+    "demand_ohe_label": "Maluku & Maluku Utara",
+    "aliases": [
+      "Maluku & Maluku Utara"
+    ]
+  },
+  "Papua & Papua Barat": {
+    "ui_label": "Papua & Papua Barat",
+    "dataset_label": "Papua & Papua Barat",
+    "imputation_folder": "Papua & Papua Barat",
+    "production_ohe_label": "Papua & Papua Barat",
+    "demand_ohe_label": "Papua & Papua Barat",
+    "aliases": [
+      "Papua & Papua Barat"
+    ]
+  }
+}

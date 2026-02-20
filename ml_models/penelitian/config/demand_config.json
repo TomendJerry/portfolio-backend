@@ -1,0 +1,40 @@
+{
+    "model_name": "hybrid_demand",
+    "model_path": "demand_model/hybrid_demand.h5",
+    "feature_order_path": "demand_model/preprocessing/feature_order_demand.json",
+    "preprocessing": {
+        "ohe_path": "demand_model/preprocessing/ohe_province_demand.pkl",
+        "yeo_johnson_path": "demand_model/preprocessing/yj_demand.pkl",
+        "scaler_path": "demand_model/preprocessing/scaler_demand.pkl"
+    },
+    "imputation": {
+        "type": "GAIN",
+        "per_province": true,
+        "base_path": "demand_model/imputation/",
+        "expected_files": [
+            "gain_generator.h5",
+            "scaler_gain.pkl",
+            "col_means.npy",
+            "feature_names.json"
+        ]
+    },
+    "dependencies": {
+        "requires_production_prediction": true,
+        "production_output_key": "prediksi_produksi",
+        "production_pipeline_script": "pipeline/pipeline_production.py"
+    },
+    "input_schema": "shared/example_input_demand.json",
+    "output_schema": {
+        "prediction_unit": "ton",
+        "field_name": "prediksi_permintaan"
+    },
+    "data_required": {
+        "historical_demand_data": "data/historical_master_demand.xlsx",
+        "sequence_length": 12
+    },
+    "target_transform": {
+    "yeo_johnson_path": "demand_model/yj_target.pkl",
+    "scaler_path": "demand_model/mm_target.pkl"
+    }
+
+}

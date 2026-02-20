@@ -1,0 +1,28 @@
+{
+    "model_name": "xgb_production",
+    "model_path": "production_model/xgb_production.pkl",
+    "feature_order_path": "production_model/feature_order_production.json",
+    "preprocessing": {
+        "ohe_path": "production_model/preprocessing/ohe_province_production.pkl",
+        "yeo_johnson_path": "production_model/preprocessing/yj_production.pkl",
+        "scaler_path": "production_model/preprocessing/scaler_production.pkl",
+        "feature_engineering_path": "production_model/preprocessing/feature_engineering_prod.pkl"
+    },
+    "imputation": {
+        "type": "GAIN",
+        "per_province": true,
+        "base_path": "production_model/imputation/",
+        "expected_files": [
+            "gain_generator.h5",
+            "scaler_gain.pkl",
+            "col_means.npy",
+            "feature_names.json"
+        ]
+    },
+    "input_schema": "shared/example_input_production.json",
+    "output_schema": {
+        "prediction_unit": "ton",
+        "field_name": "prediksi_produksi"
+    },
+    "production_adjustment_factor": 0.6402
+}
