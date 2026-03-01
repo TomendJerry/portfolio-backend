@@ -48,7 +48,12 @@ FRONTEND_ORIGIN = os.getenv("FRONTEND_ORIGIN", "http://localhost:3000")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[FRONTEND_ORIGIN, "http://127.0.0.1:3000"],
+    allow_origins=[
+        FRONTEND_ORIGIN, 
+        "http://localhost:3000",   # Tambahkan ini untuk keamanan lokal
+        "http://127.0.0.1:3000",
+        "https://portfolio-backend-j9u3.onrender.com" # Opsional: URL backend sendiri
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
