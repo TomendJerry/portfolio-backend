@@ -139,7 +139,7 @@ def activate_resume(id: int, db: Session = Depends(get_db)):
 def generate_pdf_logic(resume, preview: bool = False):
     """Fungsi pembantu yang berisi seluruh logika desain PDF Anda."""
     pdf = PDFResume()
-    font_path = os.path.join("assets", "fonts", "Times New Roman.ttf")
+    font_path = os.path.join("assets", "fonts", "TimesNewRoman.ttf")
     pdf.add_font("TNR", "", font_path)
     pdf.add_font("TNR", "B", font_path) 
     
@@ -182,8 +182,8 @@ def generate_pdf_logic(resume, preview: bool = False):
     pdf.set_font("TNR", "", 10)
 
     # Bersihkan spasi & newline agar justify sempurna
-    clean_summary = " ".join(resume.summary.split())
-
+    clean_summary = " ".join((resume.summary or "").split())
+    
     pdf.multi_cell(
         w_content,
         5,
@@ -274,7 +274,8 @@ def generate_pdf_logic(resume, preview: bool = False):
 
     pdf_content = pdf.output(dest='S')
     disposition = "inline" if preview else "attachment"
-    filename = f"CV_{resume.full_name.replace(' ', '_')}.pdf"
+    safe_name = (resume.full_name or "Resume").replace(" ", "_")
+    filename = f"CV_{safe_name}.pdf"
 
     return Response(
         content=bytes(pdf_content), 
