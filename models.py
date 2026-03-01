@@ -146,3 +146,30 @@ class MangrovePrediksi(Base):
     predicted_agb_kg = Column(Float)
     predicted_agc_kg = Column(Float)
     log_dbh = Column(Float)
+    
+class ResumeData(Base):
+    """Penyimpanan data CV dinamis untuk PDF Generator."""
+    __tablename__ = "pf_resume_data"
+    id = Column(Integer, primary_key=True, index=True)
+    resume_name = Column(String(100), default="My Resume") # Tambahkan ini
+    is_active = Column(Boolean, default=False)             # Tambahkan ini
+    full_name = Column(String(100))
+    email = Column(String(100))
+    phone = Column(Text)          
+    linkedin_url = Column(Text)   
+    github_url = Column(Text)
+    summary = Column(Text)
+    experience_json = Column(Text)  
+    projects_json = Column(Text)
+    education_json = Column(Text)
+    skills_json = Column(Text)
+    updated_at = Column(DateTime, default=datetime.datetime.utcnow, onupdate=datetime.datetime.utcnow)
+    
+class Rating(Base):
+    __tablename__ = "pf_ratings"
+    id = Column(Integer, primary_key=True, index=True)
+    score = Column(Integer)
+    comment = Column(Text, nullable=True)
+    category = Column(String(50))
+    user_ip = Column(String(45)) # Menambahkan kolom untuk menyimpan IP (IPv4 atau IPv6)
+    created_at = Column(DateTime, default=datetime.datetime.utcnow)

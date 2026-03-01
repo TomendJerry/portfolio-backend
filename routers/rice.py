@@ -186,25 +186,44 @@ def get_provinsi_history(provinsi: str, db: Session = Depends(get_db)):
     return history
 
 @router.post("/predict/production")
-def simulate_production(input_data: PredictProductionInput):
-    # Menggunakan by_alias=True agar format dict sesuai yg diharapkan
+def simulate_production(input_data: PredictProductionInput, db: Session = Depends(get_db)):
     raw_input = input_data.model_dump(by_alias=True, exclude_none=True)
     raw_input["provinsi"] = input_data.provinsi
     raw_input["tahun"] = input_data.tahun
-    raw_input["produksi (ton)"] = 0.0 # Dummy target
+    raw_input["produksi (ton)"] = 0.0 
     
     try:
         result = run_production(raw_input)
         prod_gabah = float(result.get("prediksi_produksi", 0.0))
         prod_beras = prod_gabah * PRODUCTION_ADJUSTMENT_FACTOR
         
+        # --- LOGIKA REPLACE / UPSERT PRODUKSI ---
+        existing = db.query(models.RiceDivrePrediction).filter(
+            models.RiceDivrePrediction.divre_name.ilike(input_data.provinsi),
+            models.RiceDivrePrediction.target_year == input_data.tahun
+        ).first()
+
+        if existing:
+            # Jika sudah ada, update nilai produksinya saja
+            existing.predicted_production = prod_gabah
+        else:
+            # Jika belum ada, buat baris baru
+            new_pred = models.RiceDivrePrediction(
+                divre_name=input_data.provinsi,
+                base_year=2024,
+                target_year=input_data.tahun,
+                predicted_production=prod_gabah,
+                predicted_demand=0.0 # Default awal sebelum hitung demand
+            )
+            db.add(new_pred)
+        
+        db.commit()
         return {
             "production_gabah": clean_nan(prod_gabah),
             "production_beras": clean_nan(prod_beras)
         }
     except Exception as e:
-        import traceback
-        traceback.print_exc()
+        db.rollback()
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.post("/predict/demand")
@@ -216,11 +235,77 @@ def simulate_demand(input_data: PredictDemandInput, db: Session = Depends(get_db
     try:
         hist_df = get_historical_data_from_db(db, input_data.provinsi, input_data.tahun)
         raw_input['__historical_df_override'] = hist_df
-
         result = run_demand(raw_input)
-        dem_value = result.get("prediksi_permintaan", 0.0)
-        return {"demand": clean_nan(dem_value)}
+        dem_value = float(result.get("prediksi_permintaan", 0.0))
+        prod_value = float(input_data.produksi_dari_model) # Ini adalah Gabah
+
+        # --- LOGIKA REPLACE / UPSERT DEMAND ---
+        existing = db.query(models.RiceDivrePrediction).filter(
+            models.RiceDivrePrediction.divre_name.ilike(input_data.provinsi),
+            models.RiceDivrePrediction.target_year == input_data.tahun
+        ).first()
+
+        if existing:
+            existing.predicted_demand = dem_value
+            existing.predicted_production = prod_value # Sinkronkan kembali
+        else:
+            new_pred = models.RiceDivrePrediction(
+                divre_name=input_data.provinsi,
+                base_year=2024,
+                target_year=input_data.tahun,
+                predicted_production=prod_value,
+                predicted_demand=dem_value
+            )
+            db.add(new_pred)
+        
+        db.commit()
+        return {"demand": clean_nan(dem_value), "status": "REPLACED_IN_DB"}
     except Exception as e:
-        import traceback
-        traceback.print_exc() 
+        db.rollback()
         raise HTTPException(status_code=500, detail=str(e))
+    
+@router.get("/chart-data/{provinsi}")
+def get_combined_chart_data(provinsi: str, db: Session = Depends(get_db)):
+    # 1. Batasi data historis hanya sampai tahun 2024 (Baseline terakhir yang valid)
+    history_raw = db.query(models.RiceDemand).filter(
+        models.RiceDemand.provinsi.ilike(provinsi), 
+        models.RiceDemand.tahun >= 2007,
+        models.RiceDemand.tahun <= 2024 # Batasi di sini
+    ).order_by(models.RiceDemand.tahun.asc()).all()
+    
+    productions_raw = db.query(models.RiceProduction).filter(
+        models.RiceProduction.provinsi.ilike(provinsi), 
+        models.RiceProduction.tahun >= 2007,
+        models.RiceProduction.tahun <= 2024 # Batasi di sini
+    ).all()
+    
+    prod_map = {p.tahun: p.produksi_ton for p in productions_raw}
+    combined_data = []
+
+    # 2. Masukkan data historis (Garis Solid)
+    for d in history_raw:
+        raw_prod = prod_map.get(d.tahun, None)
+        prod_beras = float(raw_prod) * PRODUCTION_ADJUSTMENT_FACTOR if raw_prod is not None else None
+        combined_data.append({
+            "tahun": d.tahun,
+            "produksi": clean_nan(prod_beras),
+            "demand": clean_nan(getattr(d, 'total_konsumsi_ton', None)),
+            "type": "history"
+        })
+
+    # 3. Ambil data prediksi mulai tahun 2025 (Garis Putus-putus)
+    predictions = db.query(models.RiceDivrePrediction).filter(
+        models.RiceDivrePrediction.divre_name.ilike(provinsi),
+        models.RiceDivrePrediction.target_year >= 2025 # Mulai dari 2025
+    ).order_by(models.RiceDivrePrediction.target_year.asc()).all()
+
+    for p in predictions:
+        val_beras = p.predicted_production * PRODUCTION_ADJUSTMENT_FACTOR
+        combined_data.append({
+            "tahun": p.target_year,
+            "produksi": clean_nan(val_beras), 
+            "demand": clean_nan(p.predicted_demand),
+            "type": "prediction"
+        })
+        
+    return combined_data
