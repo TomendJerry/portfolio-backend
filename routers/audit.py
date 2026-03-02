@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, Request, HTTPException
 from sqlalchemy.orm import Session
-from datetime import datetime
+from datetime import datetime, timezone
 import uuid
 import models  # Pastikan file models.py Anda sudah ada di folder yang sama
 from database import get_db # Import fungsi get_db Anda
@@ -33,7 +33,7 @@ async def log_visitor_access(
         # 3. Buat Record Audit Baru
         new_audit_log = models.SecurityAudit(
             id=str(uuid.uuid4()),
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(timezone.utc), 
             ip_address=client_ip,
             device_id=visitor_id,
             user_agent=user_agent,
