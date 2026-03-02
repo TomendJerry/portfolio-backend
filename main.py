@@ -44,15 +44,14 @@ Base.metadata.create_all(bind=engine)
 
 # 4. Konfigurasi CORS (Cross-Origin Resource Sharing)
 # Mengizinkan Frontend (React/Next.js) mengakses API ini
-FRONTEND_ORIGIN = os.getenv("FRONTEND_ORIGIN", "http://localhost:3000")
+FRONTEND_ORIGIN = os.getenv("FRONTEND_URL", "http://localhost:3000")
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        FRONTEND_ORIGIN, 
+        FRONTEND_URL, 
         "http://localhost:3000",   # Tambahkan ini untuk keamanan lokal
-        "http://127.0.0.1:3000",
-        "https://portfolio-backend-j9u3.onrender.com" # Opsional: URL backend sendiri
+        "http://127.0.0.1:3000"
     ],
     allow_credentials=True,
     allow_methods=["*"],
