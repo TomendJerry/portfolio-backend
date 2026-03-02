@@ -44,7 +44,7 @@ Base.metadata.create_all(bind=engine)
 
 # 4. Konfigurasi CORS (Cross-Origin Resource Sharing)
 # Mengizinkan Frontend (React/Next.js) mengakses API ini
-FRONTEND_ORIGIN = os.getenv("FRONTEND_URL", "http://localhost:3000")
+FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:3000")
 
 app.add_middleware(
     CORSMiddleware,
