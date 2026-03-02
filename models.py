@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String, Float, Boolean, Text, DateTime, JSON
 from database import Base
 import datetime
+from datetime import timezone
 import uuid
 
 # ==========================================
@@ -177,16 +178,13 @@ class Rating(Base):
 class SecurityAudit(Base):
     __tablename__ = "pf_security_audit"
 
-    id = Column(String, primary_key=True, index=True) # UUID atau Hash
-    timestamp = Column(DateTime, default=datetime.utcnow)
+    id = Column(String, primary_key=True, index=True) 
+    # Gunakan lambda agar waktu diambil tepat saat data dimasukkan, bukan saat server start
+    timestamp = Column(DateTime, default=lambda: datetime.datetime.now(timezone.utc))
     ip_address = Column(String)
-    device_id = Column(String, index=True) # VisitorID dari FingerprintJS
+    device_id = Column(String, index=True) 
     user_agent = Column(Text)
-    
-    # Simpan detail teknis lainnya dalam bentuk JSON agar fleksibel
-    browser_data = Column(JSON) # Resolusi, Font, GPU, dll.
-    geo_location = Column(JSON) # Negara, Kota (jika pakai API GeoIP)
-    
-    # Catatan aktivitas
-    action = Column(String) # misal: "VIEW_RESUME", "LOGIN_ATTEMPT"
+    browser_data = Column(JSON) 
+    geo_location = Column(JSON) 
+    action = Column(String) 
     status_code = Column(String)
