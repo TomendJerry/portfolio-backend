@@ -6,7 +6,7 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 from routers.users import router as users_router
-from routers import mangrove, rice, portfolio, rating
+from routers import mangrove, rice, portfolio, rating, audit
 from routers.mangrove import router as mangrove_router
 from routers.rice import router as rice_router
 from routers.portfolio import router as portfolio_router
@@ -67,6 +67,7 @@ app.include_router(login_router)  # Mendaftarkan router autentikasi login
 app.include_router(users_router)
 app.include_router(resume_router)
 app.include_router(rating.router)
+app.include_router(audit.router)
 
 # 6. Endpoint Dasar untuk Pengecekan Sistem (Dibatasi 5 kali per menit per IP)
 @app.get("/", tags=["System Check"])
