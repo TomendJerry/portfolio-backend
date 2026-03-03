@@ -81,5 +81,6 @@ def root(request: Request):
 
 # 7. Eksekusi Server
 if __name__ == "__main__":
+    port = int(os.getenv("PORT", 8000))
     # Gunakan reload=True saat pengembangan agar server restart otomatis saat kode diubah
     uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=(ENV == "dev"))

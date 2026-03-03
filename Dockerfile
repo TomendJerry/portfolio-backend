@@ -1,19 +1,22 @@
-# Gunakan image Python yang ringan
+# Gunakan image Python yang sangat ringan
 FROM python:3.10-slim
 
 WORKDIR /app
 
-# Instal dependensi sistem yang diperlukan untuk PostgreSQL
-RUN apt-get update && apt-get install -y libpq-dev gcc && rm -rf /var/lib/apt/lists/*
+# Hanya instal library yang benar-benar dibutuhkan untuk psycopg2-binary
+# libpq-dev tetap dibutuhkan untuk runtime PostgreSQL
+RUN apt-get update && apt-get install -y libpq-dev && rm -rf /var/lib/apt/lists/*
 
-# Copy dan instal requirements
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy seluruh kode backend
+# Upgrade pip dan instal dependensi
+RUN pip install --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
+
 COPY . .
 
-# Ekspos port yang digunakan di main.py
-EXPOSE 8000
+# Render menggunakan port 10000 secara default untuk paket gratis
+EXPOSE 10000
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Pastikan port sesuai dengan EXPOSE dan host diatur ke 0.0.0.0
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "10000"]
