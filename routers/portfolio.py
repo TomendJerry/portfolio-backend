@@ -117,17 +117,25 @@ async def upload_project_document(
     if not project:
         raise HTTPException(status_code=404, detail="Proyek tidak ditemukan")
 
-    # Tentukan lokasi simpan (Backend/uploads/)
-    file_location = f"uploads/{project_id}_{file.filename}"
+    # Tentukan folder (pastikan folder uploads ada)
+    if not os.path.exists("uploads"):
+        os.makedirs("uploads")
+
+    file_extension = os.path.splitext(file.filename)[1]
+    # Berikan nama file yang unik agar tidak bentrok
+    safe_filename = f"{project_id}_{datetime.datetime.now().strftime('%Y%m%d%H%M%S')}{file_extension}"
+    file_location = f"uploads/{safe_filename}"
+
     with open(file_location, "wb+") as file_object:
         shutil.copyfileobj(file.file, file_object)
 
-    # Simpan URL ke database
-    doc_url = f"http://127.0.0.1:8000/{file_location}"
-    project.documentation_url = doc_url
+    # PERBAIKAN: Hanya simpan PATH saja, jangan simpan http://127.0.0.1
+    # Ini membuat data di DB menjadi: "/uploads/projectid_filename.pdf"
+    doc_path = f"/{file_location}"
+    project.documentation_url = doc_path
     db.commit()
 
-    return {"info": f"file '{file.filename}' saved at '{file_location}'", "url": doc_url}
+    return {"info": "File uploaded successfully", "path": doc_path}
 
 @router.put("/projects/{project_id}", response_model=ProjectRead)
 @router.put("/projects/{project_id}", response_model=ProjectRead)
