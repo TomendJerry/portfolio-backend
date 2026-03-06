@@ -67,7 +67,7 @@ app.include_router(login_router)  # Mendaftarkan router autentikasi login
 app.include_router(users_router)
 app.include_router(resume_router)
 app.include_router(rating.router)
-app.include_router(audit.router)
+app.include_router(audit.router, prefix="/api/v1")
 
 # 6. Endpoint Dasar untuk Pengecekan Sistem (Dibatasi 5 kali per menit per IP)
 @app.get("/", tags=["System Check"])
